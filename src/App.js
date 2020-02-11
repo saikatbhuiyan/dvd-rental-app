@@ -10,8 +10,10 @@ import Rentals from './component/rentals';
 import NotFound from './component/notFound';
 import NavBar from './component/reusing/navbar';
 import MovieForm from './component/movieForm';
+import LoginForm from './component/reusing/loginForm';
 
 import './App.css';
+
 
 
 class App extends Component {
@@ -27,6 +29,10 @@ class App extends Component {
                   path="/" exact 
                   component={Movies}
               /> */}
+              <Route 
+                  path="/login" 
+                  component={LoginForm}
+              />
               <Route 
                   path="/movies/:id" 
                   component={MovieForm}

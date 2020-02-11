@@ -10,7 +10,7 @@ import {Link, NavLink} from 'react-router-dom';
 // server didn't send the additional request to the server
 const NavBar = () => {
   return ( 
-    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+    <nav className="navbar navbar-expand-lg navbar-light bg-green">
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
@@ -25,6 +25,9 @@ const NavBar = () => {
           </li>
           <li className='nav-item'>
             <NavLink className='nav-link' to="/rentals">Rentals</NavLink>
+          </li>
+          <li className='nav-item'>
+            <NavLink className='nav-link' to="/login">Login</NavLink>
           </li>
         </ul>
       </div>
