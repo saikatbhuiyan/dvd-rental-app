@@ -3,14 +3,14 @@ import { Route, Switch, Redirect } from 'react-router-dom';
 
 
 import Movies from './component/movies';
-
-
 import Customers from './component/customers';
 import Rentals from './component/rentals';
 import NotFound from './component/notFound';
 import NavBar from './component/reusing/navbar';
 import MovieForm from './component/movieForm';
 import LoginForm from './component/reusing/loginForm';
+import RegisterForm from './component/reusing/registerForm';
+
 
 import './App.css';
 
@@ -33,6 +33,14 @@ class App extends Component {
                   path="/login" 
                   component={LoginForm}
               />
+              <Route 
+                  path="/register" 
+                  component={RegisterForm}
+              />
+              {/* <Route 
+                  path="movies/new" 
+                  component={MovieForm}
+              /> */}
               <Route 
                   path="/movies/:id" 
                   component={MovieForm}
