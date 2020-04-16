@@ -1,5 +1,6 @@
 import http from './httpService';
+import {apiUrl} from '../config.json';
 
 export function getGenres() {
-  return http.get('http://127.0.0.1:8000/api/movie/genres/');
+  return http.get(apiUrl + 'genres/');
 }

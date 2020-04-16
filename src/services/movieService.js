@@ -1,6 +1,8 @@
 import http from './httpService';
+import {apiUrl} from '../config.json';
 
-const apiEndpoint = 'http://127.0.0.1:8000/api/movie/movies/';
+
+const apiEndpoint = apiUrl + 'movies/';
 
 export function getMovies() {
   return http.get(apiEndpoint);

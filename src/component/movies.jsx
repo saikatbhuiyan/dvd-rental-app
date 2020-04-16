@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { toast } from 'react-toastify';
 import MoviesTable from './movieTable';
 import { getMovies, deleteMovie } from '../services/movieService';
 import Pagination from './reusing/pagination';
@@ -22,16 +23,28 @@ class Movies extends Component {
 
     async componentDidMount() {
         const { data } = await getGenres();
-        const genres = [{ _id:"", name: 'All Genres'}, ...data]
-        console.log(genres);
+        const genres = [{ id:"", name: 'All Genres'}, ...data]
+        // console.log(genres);
         const {data:movies} = await getMovies();
          this.setState({ movies: movies, genres });
      }
     
-    handleDelete = movie => {
-        const movies = this.state.movies.filter(m => m._id !== movie._id);
+    handleDelete = async movie => {
+        const originalMovies = this.state.movies;
+        const movies = originalMovies.filter(m => m.id !== movie.id);
         this.setState({ movies });
-        deleteMovie(movies.id);
+
+        try {
+          await deleteMovie(movie.id);
+        }
+        catch (ex) {
+          if (ex.response && ex.response.status === 404 ){
+            toast.error('This movie already been deleted!');
+          }
+
+          this.setState({movies: originalMovies});
+        }
+
       };
     
     handleLike = (movie) => {
@@ -69,8 +82,8 @@ class Movies extends Component {
           filtered = allMovies.filter(m =>
             m.title.toLowerCase().startsWith(searchQuery.toLowerCase())
           );
-        else if (selectedGenre && selectedGenre._id)
-          filtered = allMovies.filter(m => m.genre._id === selectedGenre._id);
+        else if (selectedGenre && selectedGenre.id)
+          filtered = allMovies.filter(m => m.genre.id === selectedGenre.id);
     
         const sorted = _.orderBy(filtered, [sortColumn.path], [sortColumn.order]);
     

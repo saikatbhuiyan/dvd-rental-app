@@ -13,7 +13,7 @@ const Group = (props) => {
 
 Group.defaultProps = {
   textProperty: 'name',
-  valueProperty: '_id',
+  valueProperty: 'id',
 }
 
 
