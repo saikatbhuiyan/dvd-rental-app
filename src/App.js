@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import {ToastContainer} from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import Movies from './component/movies';
@@ -12,64 +12,39 @@ import MovieForm from './component/movieForm';
 import LoginForm from './component/reusing/loginForm';
 import RegisterForm from './component/reusing/registerForm';
 
-
 import './App.css';
 
-
-
 class App extends Component {
-
-  render() { 
-    return ( 
+  render() {
+    return (
       <React.Fragment>
         <ToastContainer />
         <NavBar />
 
-        <main className="container">   
-        <Switch >
-              {/* <Route 
+        <main className="container">
+          <Switch>
+            {/* <Route 
                   path="/" exact 
                   component={Movies}
               /> */}
-              <Route 
-                  path="/login" 
-                  component={LoginForm}
-              />
-              <Route 
-                  path="/register" 
-                  component={RegisterForm}
-              />
-              {/* <Route 
+            <Route path="/login" component={LoginForm} />
+            <Route path="/register" component={RegisterForm} />
+            {/* <Route 
                   path="movies/new" 
                   component={MovieForm}
               /> */}
-              <Route 
-                  path="/movies/:id" 
-                  component={MovieForm}
-              />
-              <Route 
-                  path="/movies" 
-                  component={Movies}
-              />
-              <Redirect from='/' exact  to='/movies' />
-              <Route 
-                  path="/customers" 
-                  component={Customers}
-              />
-              <Route 
-                  path="/rentals" 
-                  component={Rentals}
-              />
-              <Route 
-                  path="/not-found" 
-                  component={NotFound}
-              />
-              <Redirect to="/not-found" /> 
+            <Route path="/movies/:id" component={MovieForm} />
+            <Route path="/movies" component={Movies} />
+            <Redirect from="/" exact to="/movies" />
+            <Route path="/customers" component={Customers} />
+            <Route path="/rentals" component={Rentals} />
+            <Route path="/not-found" component={NotFound} />
+            <Redirect to="/not-found" />
           </Switch>
-      </main>
-    </React.Fragment>
-     );
+        </main>
+      </React.Fragment>
+    );
   }
 }
- 
+
 export default App;

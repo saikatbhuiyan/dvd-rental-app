@@ -1,64 +1,53 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import Joi from 'joi-browser';
 
 import Input from './input';
 import Select from './select';
 
 class Form extends Component {
-  
   state = {
     data: {},
-    errors: {}
+    errors: {},
   };
 
-  
-  handleSubmit = e =>{
-
+  handleSubmit = (e) => {
     e.preventDefault(); // didn't reload the page when click submit
 
     const errors = this.validate();
     this.setState({ errors: errors || {} });
     if (errors) return;
-    
+
     this.doSubmit();
   };
 
-
-
   validate = () => {
-    const option = { abortEarly: false};
+    const option = { abortEarly: false };
     const { error } = Joi.validate(this.state.data, this.schema, option);
-    
-    if(!error) return null;
+
+    if (!error) return null;
 
     const errors = {};
     for (let item of error.details) errors[item.path[0]] = item.message;
 
     return errors;
-
   };
 
-
   validateProperty = ({ name, value }) => {
-
-    const obj = { [name]: value};
+    const obj = { [name]: value };
     const schema = { [name]: this.schema[name] };
 
-    const {error} = Joi.validate(obj, schema);
+    const { error } = Joi.validate(obj, schema);
 
     return error ? error.details[0].message : null;
-
   };
 
   handleChange = ({ currentTarget: input }) => {
-
-    const errors = {...this.state.errors};
+    const errors = { ...this.state.errors };
     const errorMessage = this.validateProperty(input);
     if (errorMessage) errors[input.name] = errorMessage;
     else delete errors[input.name];
 
-
-    const data = {...this.state.data};
+    const data = { ...this.state.data };
 
     data[input.name] = input.value;
 
@@ -67,41 +56,39 @@ class Form extends Component {
 
   renderButton(label) {
     return (
-    <button disabled={this.validate()} className="btn btn-primary">{label}</button>
+      <button disabled={this.validate()} className="btn btn-primary">
+        {label}
+      </button>
     );
-  };
+  }
 
-
-  renderInput(name, label, type="text") {
-
+  renderInput(name, label, type = 'text') {
     const { data, errors } = this.state;
     return (
-      <Input 
+      <Input
         value={data[name]}
         onChange={this.handleChange}
-        type = {type}
+        type={type}
         name={name}
-        label = {label}
-        error = {errors[name]}
+        label={label}
+        error={errors[name]}
       />
     );
   }
 
   renderSelect(name, label, options) {
-
     const { data, errors } = this.state;
     return (
-      <Select 
+      <Select
         name={name}
-        label = {label}
+        label={label}
         value={data[name]}
         options={options}
         onChange={this.handleChange}
-        error = {errors[name]}
+        error={errors[name]}
       />
     );
   }
-
 }
- 
+
 export default Form;
